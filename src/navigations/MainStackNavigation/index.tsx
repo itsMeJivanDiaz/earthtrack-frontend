@@ -7,19 +7,20 @@ import APP_COLORS from '../../common/colors';
 import NavigatorHome from './NavigatorHome';
 import NavigatorProfile from './NavigatorProfile';
 import NavigatorSettings from './NavigatorSettings';
+import AppSearchBar from '../../components/AppSearchBar';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-const HomeIcon = (color: string) => (
+const HomeIcon = (color: string): JSX.Element => (
   <Icon name="home" size={22} color={color} />
 );
 
-const ProfileIcon = (color: string) => (
+const ProfileIcon = (color: string): JSX.Element => (
   <Icon name="person" size={22} color={color} />
 );
 
-const SettingsIcon = (color: string) => (
+const SettingsIcon = (color: string): JSX.Element => (
   <Icon name="settings" size={22} color={color} />
 );
 
@@ -48,6 +49,7 @@ const BottomNav = (): JSX.Element => {
             tabBarStyle: tabBarStyle,
             tabBarLabelStyle: tabBarLabelStyle,
             headerShown: false,
+            tabBarHideOnKeyboard: true,
           };
         }}>
         <Tab.Screen
@@ -103,12 +105,23 @@ const BottomNav = (): JSX.Element => {
   );
 };
 
+const CustomHeader = (): JSX.Element => {
+  return (
+    <AppSearchBar
+      placeholder="search product..."
+      onSearchPress={value => console.log(value)}
+    />
+  );
+};
+
 const MainStackNavigation = (): JSX.Element => {
   return (
     <Stack.Navigator
       screenOptions={{
         cardStyle: {backgroundColor: 'black'},
-        headerShown: false,
+        headerShown: true,
+        header: () => CustomHeader(),
+        gestureEnabled: true,
       }}>
       <Stack.Group
         screenOptions={{

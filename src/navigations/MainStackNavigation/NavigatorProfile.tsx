@@ -10,7 +10,7 @@ const NavigatorProfile = (): JSX.Element => {
     <Stack.Navigator
       initialRouteName="Profile"
       screenOptions={{
-        headerShown: true,
+        headerShown: false,
         gestureEnabled: false,
         headerStyle: {
           backgroundColor: APP_COLORS.secondary,

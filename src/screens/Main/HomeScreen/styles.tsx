@@ -6,8 +6,17 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: APP_COLORS.secondary,
-    height: 500,
+    backgroundColor: APP_COLORS.light,
+    paddingTop: 20,
+    paddingHorizontal: 15,
+  },
+  cardContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    width: '100%',
+    columnGap: 10,
   },
 });
 

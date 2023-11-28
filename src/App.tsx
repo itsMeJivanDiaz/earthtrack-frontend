@@ -6,6 +6,7 @@ import reduxStore from './redux/store';
 import RootStackNavigation from './navigations/RootStackNavigation';
 import {enableScreens} from 'react-native-screens';
 import {StyleSheet} from 'react-native';
+import Toast from 'react-native-toast-message';
 
 enableScreens();
 
@@ -26,6 +27,7 @@ const App = (): JSX.Element => {
             edges={['bottom', 'left', 'right']}
             style={styles.safeviewArea}>
             <RootStackNavigation />
+            <Toast />
           </SafeAreaView>
         </SafeAreaProvider>
       </PersistGate>

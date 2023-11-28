@@ -10,7 +10,7 @@ const NavigatorHome = (): JSX.Element => {
     <Stack.Navigator
       initialRouteName="Home"
       screenOptions={{
-        headerShown: true,
+        headerShown: false,
         gestureEnabled: false,
         headerStyle: {
           backgroundColor: APP_COLORS.secondary,

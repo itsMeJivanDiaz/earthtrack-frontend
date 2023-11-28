@@ -1,6 +1,6 @@
 const APP_COLORS = {
   primary: '#FCB623',
-  secondary: '#e5e5e5',
+  secondary: '#E5E5E5',
   light: '#FFF',
   dark: '#000',
 };
