@@ -13,6 +13,7 @@ import {
 import {decode} from 'base-64';
 import {useDispatch} from 'react-redux';
 import {setUserData} from '../../../redux/reducer/User';
+import {t} from '../../../localization/index';
 
 global.atob = decode;
 
@@ -71,7 +72,7 @@ const LoginScreen = (): JSX.Element => {
           <AppButton
             onPress={() => login(auth)}
             key={index}
-            title={`${user.role} as ${user.name}`}
+            title={`${t.getString(user.role.toLowerCase())} as ${user.name}`}
             backgroundColor={APP_COLORS.dark}
             height={50}
             width={'100%'}
@@ -88,7 +89,7 @@ const LoginScreen = (): JSX.Element => {
         <Text style={styles.title}>EarthTrack</Text>
       </View>
       <View style={styles.contentContainer}>
-        <Text style={styles.loginText}>Login with</Text>
+        <Text style={styles.loginText}>{t.login_with}:</Text>
         <View style={styles.buttonContainer}>{renderUsers()}</View>
       </View>
     </View>

@@ -1,133 +1,63 @@
 import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
-import Icon from 'react-native-vector-icons/Ionicons';
-import APP_COLORS from '../../common/colors';
+import {
+  StackNavigationProp,
+  createStackNavigator,
+} from '@react-navigation/stack';
+import {RootLanguageStateModel, StackParamList} from '../../interfaces';
 
-import NavigatorHome from './NavigatorHome';
-import NavigatorProfile from './NavigatorProfile';
-import NavigatorSettings from './NavigatorSettings';
+import NavigatorBottom from './NavigatorBottom';
+import NavigatorProduct from './NavigatorProduct';
+import {useSelector} from 'react-redux';
+import {changeLanguage, t} from '../../localization';
 import AppSearchBar from '../../components/AppSearchBar';
+import {useNavigation} from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 
-const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
-
-const HomeIcon = (color: string): JSX.Element => (
-  <Icon name="home" size={22} color={color} />
-);
-
-const ProfileIcon = (color: string): JSX.Element => (
-  <Icon name="person" size={22} color={color} />
-);
-
-const SettingsIcon = (color: string): JSX.Element => (
-  <Icon name="settings" size={22} color={color} />
-);
-
-const BottomNav = (): JSX.Element => {
-  const tabBarStyle = {
-    backgroundColor: APP_COLORS.dark,
-    height: 65,
-    gap: 5,
-    columnGap: 10,
-    paddingTop: 10,
-  };
-
-  const tabBarLabelStyle = {
-    fontSize: 14,
-    fontFamily: 'Urbanist-Regular',
-  };
-
-  return (
-    <>
-      <Tab.Navigator
-        backBehavior="history"
-        screenOptions={() => {
-          return {
-            tabBarActiveTintColor: APP_COLORS.primary,
-            tabBarInactiveTintColor: APP_COLORS.light,
-            tabBarStyle: tabBarStyle,
-            tabBarLabelStyle: tabBarLabelStyle,
-            headerShown: false,
-            tabBarHideOnKeyboard: true,
-          };
-        }}>
-        <Tab.Screen
-          name="HomeTab"
-          component={NavigatorHome}
-          options={() => {
-            return {
-              tabBarLabel: 'Home',
-              tabBarIcon: ({focused}) => {
-                let color = APP_COLORS.light;
-                if (focused) {
-                  color = APP_COLORS.primary;
-                }
-                return HomeIcon(color);
-              },
-            };
-          }}
-        />
-        <Tab.Screen
-          name="SettingsTab"
-          component={NavigatorSettings}
-          options={() => {
-            return {
-              tabBarLabel: 'Settings',
-              tabBarIcon: ({focused}) => {
-                let color = APP_COLORS.light;
-                if (focused) {
-                  color = APP_COLORS.primary;
-                }
-                return SettingsIcon(color);
-              },
-            };
-          }}
-        />
-        <Tab.Screen
-          name="ProfileTab"
-          component={NavigatorProfile}
-          options={() => {
-            return {
-              tabBarLabel: 'Profile',
-              tabBarIcon: ({focused}) => {
-                let color = APP_COLORS.light;
-                if (focused) {
-                  color = APP_COLORS.primary;
-                }
-                return ProfileIcon(color);
-              },
-            };
-          }}
-        />
-      </Tab.Navigator>
-    </>
-  );
-};
+const Stack = createStackNavigator<StackParamList>();
 
 const CustomHeader = (): JSX.Element => {
+  const navigation = useNavigation<StackNavigationProp<StackParamList>>();
   return (
     <AppSearchBar
-      placeholder="search product..."
-      onSearchPress={value => console.log(value)}
+      placeholder={t.search_product}
+      onSearchPress={(text: string) => {
+        if (!text) {
+          Toast.show({
+            type: 'error',
+            text1: t.empty_search,
+            text2: t.enter_product,
+          });
+          return;
+        }
+        navigation.navigate('ProductNav', {isSearch: true, query: text});
+      }}
     />
   );
 };
 
 const MainStackNavigation = (): JSX.Element => {
+  const settings = useSelector(
+    (state: RootLanguageStateModel) => state.settings.languageData,
+  );
+  changeLanguage(settings?.language || 'en');
   return (
     <Stack.Navigator
+      initialRouteName="BottomNav"
       screenOptions={{
         cardStyle: {backgroundColor: 'black'},
         headerShown: true,
-        header: () => CustomHeader(),
         gestureEnabled: true,
+        header: () => CustomHeader(),
       }}>
-      <Stack.Group
-        screenOptions={{
-          ...TransitionPresets.ModalFadeTransition,
-        }}>
-        <Stack.Screen name="main" component={BottomNav} />
+      <Stack.Group>
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="ProductNav"
+          component={NavigatorProduct}
+        />
+        <Stack.Screen name="BottomNav" component={NavigatorBottom} />
       </Stack.Group>
     </Stack.Navigator>
   );

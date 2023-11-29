@@ -10,6 +10,7 @@ import APP_COLORS from '../../../common/colors';
 import {useDispatch} from 'react-redux';
 import {resetUserData} from '../../../redux/reducer/User';
 import {setSettingsData} from '../../../redux/reducer/Settings';
+import {t} from '../../../localization';
 
 const ProfileScreen = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -31,11 +32,13 @@ const ProfileScreen = (): JSX.Element => {
           style={
             styles.nameText
           }>{`${userData.firstname} ${userData.lastname}`}</Text>
-        <Text style={styles.subText}>{`${capitalize(userData.role)}`}</Text>
+        <Text style={styles.subText}>{`${capitalize(
+          t.getString(userData.role.toLowerCase()),
+        )}`}</Text>
         <Text style={styles.subText}>{`${userData.username}`}</Text>
       </View>
       <AppButton
-        title="change user"
+        title={t.change_user}
         backgroundColor={APP_COLORS.primary}
         height={45}
         width={'100%'}

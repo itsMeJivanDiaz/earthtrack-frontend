@@ -1,15 +1,17 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import HomeScreen from '../../screens/Main/HomeScreen';
 import APP_COLORS from '../../common/colors';
-import {StackParamList} from '../../interfaces';
+import ProductScreen from '../../screens/Main/ProductScreen';
+import {RootStackNavigationProps, StackParamList} from '../../interfaces';
 
 const Stack = createStackNavigator<StackParamList>();
 
-const NavigatorHome = (): JSX.Element => {
+const NavigatorProduct = (
+  props: RootStackNavigationProps<'ProductNav'>,
+): JSX.Element => {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="Product"
       screenOptions={{
         headerShown: false,
         gestureEnabled: false,
@@ -21,9 +23,13 @@ const NavigatorHome = (): JSX.Element => {
           color: APP_COLORS.dark,
         },
       }}>
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen
+        name="Product"
+        component={ProductScreen}
+        initialParams={{...props.route.params}}
+      />
     </Stack.Navigator>
   );
 };
 
-export default NavigatorHome;
+export default NavigatorProduct;

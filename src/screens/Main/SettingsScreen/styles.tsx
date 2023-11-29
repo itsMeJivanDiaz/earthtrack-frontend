@@ -26,6 +26,30 @@ const styles = StyleSheet.create({
     color: APP_COLORS.dark,
     fontSize: 15,
   },
+  modalContainer: {
+    backgroundColor: 'rgba(0 0 0 / 0.8)',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+  },
+  modalContent: {
+    height: 200,
+    width: '100%',
+    backgroundColor: APP_COLORS.light,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 15,
+    gap: 10,
+  },
+  modalText: {
+    fontFamily: 'Urbanist-Regular',
+    color: APP_COLORS.dark,
+    fontSize: 18,
+    textAlign: 'center',
+    marginBottom: 15,
+  },
 });
 
 export default styles;
