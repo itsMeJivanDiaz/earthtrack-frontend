@@ -15,7 +15,11 @@ const AppProductListCard = (props: AppProductListCardPropType): JSX.Element => {
     <View style={styles.listCardContainer}>
       <View style={styles.flex1}>
         <View style={styles.imageContainer}>
-          <Image source={image} style={styles.image} />
+          <Image
+            source={image}
+            style={styles.image}
+            accessibilityLabel="component-image"
+          />
         </View>
         <View style={styles.descriptionContainer}>
           <Text numberOfLines={1} style={styles.title}>

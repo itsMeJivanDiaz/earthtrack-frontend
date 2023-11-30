@@ -3,13 +3,13 @@ import {TextInput, View} from 'react-native';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import APP_COLORS from '../../common/colors';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native';
 
 interface AppSearchBarPropType {
   placeholder: string;
   onSearchPress: (text: string) => void;
   showBackButton?: boolean;
-  onBachButtonPress?: () => void;
+  onBackButtonPress?: () => void;
   preValue?: string;
 }
 
@@ -18,7 +18,7 @@ const AppSearchBar = (props: AppSearchBarPropType): JSX.Element => {
     placeholder,
     onSearchPress,
     showBackButton = false,
-    onBachButtonPress,
+    onBackButtonPress,
     preValue = '',
   } = props;
 
@@ -27,7 +27,9 @@ const AppSearchBar = (props: AppSearchBarPropType): JSX.Element => {
   const renderBackButton = (): JSX.Element => {
     if (showBackButton) {
       return (
-        <TouchableOpacity onPress={() => onBachButtonPress?.()}>
+        <TouchableOpacity
+          accessibilityLabel="back-button"
+          onPress={() => onBackButtonPress?.()}>
           <Icon name="chevron-left" size={25} color={APP_COLORS.light} />
         </TouchableOpacity>
       );
@@ -46,6 +48,7 @@ const AppSearchBar = (props: AppSearchBarPropType): JSX.Element => {
         onChangeText={text => setValue(text)}
       />
       <TouchableOpacity
+        accessibilityLabel="search-button"
         onPress={() => {
           onSearchPress(value);
           setValue('');

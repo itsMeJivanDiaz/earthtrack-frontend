@@ -185,7 +185,7 @@ const ProductScreen = (
           placeholder={t.search_product}
           onSearchPress={(text: string) => handleSearch(text)}
           showBackButton={navigation.canGoBack()}
-          onBachButtonPress={() => navigation.goBack()}
+          onBackButtonPress={() => navigation.goBack()}
           preValue={query}
         />
         <View style={styles.contentContainer}>

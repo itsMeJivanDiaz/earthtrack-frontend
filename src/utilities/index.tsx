@@ -1,5 +1,6 @@
 import {android, apple, windows, unknown} from '../assets/images';
 import {ImageSourcePropType} from 'react-native';
+
 const capitalize = (str: string): string => {
   return str.at(0)?.toUpperCase() + str.slice(1);
 };

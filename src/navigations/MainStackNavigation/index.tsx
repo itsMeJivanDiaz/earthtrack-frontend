@@ -3,12 +3,11 @@ import {
   StackNavigationProp,
   createStackNavigator,
 } from '@react-navigation/stack';
-import {RootLanguageStateModel, StackParamList} from '../../interfaces';
+import {StackParamList} from '../../interfaces';
 
 import NavigatorBottom from './NavigatorBottom';
 import NavigatorProduct from './NavigatorProduct';
-import {useSelector} from 'react-redux';
-import {changeLanguage, t} from '../../localization';
+import {t} from '../../localization';
 import AppSearchBar from '../../components/AppSearchBar';
 import {useNavigation} from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
@@ -36,10 +35,6 @@ const CustomHeader = (): JSX.Element => {
 };
 
 const MainStackNavigation = (): JSX.Element => {
-  const settings = useSelector(
-    (state: RootLanguageStateModel) => state.settings.languageData,
-  );
-  changeLanguage(settings?.language || 'en');
   return (
     <Stack.Navigator
       initialRouteName="BottomNav"

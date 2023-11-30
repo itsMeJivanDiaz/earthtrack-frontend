@@ -90,7 +90,11 @@ const LoginScreen = (): JSX.Element => {
       </View>
       <View style={styles.contentContainer}>
         <Text style={styles.loginText}>{t.login_with}:</Text>
-        <View style={styles.buttonContainer}>{renderUsers()}</View>
+        <View
+          accessibilityLabel="user-container"
+          style={styles.buttonContainer}>
+          {renderUsers()}
+        </View>
       </View>
     </View>
   );

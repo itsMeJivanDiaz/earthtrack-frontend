@@ -1,7 +1,12 @@
 import React from 'react';
 import styles from './styles';
-import {View, Image, ImageSourcePropType, Text} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {
+  View,
+  Image,
+  ImageSourcePropType,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 
 interface AppCategoryCardPropType {
   image: ImageSourcePropType;
@@ -14,11 +19,17 @@ const AppCategoryCard = (props: AppCategoryCardPropType) => {
   return (
     <TouchableOpacity onPress={() => onPress()}>
       <View style={styles.container}>
-        <Image source={image} style={styles.image} />
+        <Image
+          source={image}
+          style={styles.image}
+          accessibilityLabel="category-image"
+        />
         <Text style={styles.title}>{title}</Text>
       </View>
     </TouchableOpacity>
   );
 };
+
+export type {AppCategoryCardPropType};
 
 export default AppCategoryCard;
